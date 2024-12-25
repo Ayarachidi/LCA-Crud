@@ -1,0 +1,15 @@
+{
+  "/USER-SERVICE": {
+    "target": "http://localhost:8888",
+    "secure": false,
+    "logLevel": "debug", 
+    "changeOrigin": true
+  },
+  "/LABO-CONTACT-ADRESSE-SERVICE": {
+    "target": "http://localhost:8888",
+    "secure": false,
+    "logLevel": "debug",  
+    "changeOrigin": true
+  }
+}
+

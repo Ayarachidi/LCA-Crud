@@ -1,0 +1,140 @@
+
+<header id="header" class="fixed-top">
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+
+    <div class="container d-flex align-items-center">
+      <img src="/iconelabo.jpg" width="40" height="40" style="margin-right:10px;margin-left:3px;">
+      <h1 class="logo me-auto"><a href="#" class="logo">LabControl</a></h1>
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#hero">Acceuil</a></li>
+          <li><a class="nav-link scrollto " href="#services">Services</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav>
+      <a class="appointment-btn scrollto login-link" href="login.html?type=agent">Espace patient</a>
+      <a 
+      class="appointment-btn scrollto"
+      (click)="redirectToLogin()">
+      <span class="d-none d-md-inline">Connectez-vous</span>
+    </a>
+    
+
+    </div>
+  </header>
+  
+  <section id="hero" class="d-flex align-items-center">
+    <div class="container">
+     
+    </div>
+  </section>
+  
+  <main id="main">
+    <section id="why-us" class="why-us">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-4 d-flex align-items-stretch">
+              <div class="content">
+                <h3>Pourquoi choisir   LabControl ?</h3>
+                <p>
+                  Bienvenue chez LabControl, votre partenaire de confiance pour des analyses médicales rapides et fiables. Grâce à une technologie de pointe et une interface conviviale, nous offrons à nos patients un accès sécurisé à leurs résultats en ligne. Notre engagement envers l'innovation et la précision garantit des soins adaptés à vos besoins. Faites le choix de l'excellence avec LabControl, où santé et technologie se rencontrent pour votre bien-être.
+              </div>
+            </div>
+            <div class="col-lg-8 d-flex align-items-stretch">
+              <div class="icon-boxes d-flex flex-column justify-content-center">
+                <div class="row">
+                  <div class="col-xl-5 d-flex align-items-stretch">
+                    <div class="icon-box mt-4 mt-xl-0">
+                      <i class="bx bx-receipt"></i>
+                      <h4>Analyses disponibles 24h/24</h4>
+                      <p>Notre laboratoire offre un service d’analyses médicales disponible 24h/24 et 7j/7 pour répondre à vos besoins urgents. </p>
+                    </div>
+                  </div>
+                  <div class="col-xl-5 d-flex align-items-stretch">
+                    <div class="icon-box mt-4 mt-xl-0">
+                      <i class="bx bx-images"></i>
+                      <h4>Réactivité et précision</h4>
+                      <p>Notre équipe assure des délais de traitement rapides tout en garantissant une précision maximale pour vos résultats médicaux.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+        </div>
+      </section>
+  
+    <section id="services" class="services">
+        <div class="container">
+      
+          <div class="section-title">
+            <h2 style="color:#0e2238;">Services de Laboratoire</h2>
+          </div>
+      
+          <div class="row">
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+              <div class="icon-box">
+                <div class="icon"><i class="fas fa-vial"></i></div>
+                <h4><a href="">Analyses de Sang et de Biologie Médicale</a></h4>
+              </div>
+            </div>
+      
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+              <div class="icon-box">
+                <div class="icon"><i class="fas fa-flask"></i></div>
+                <h4><a href="">Tests de Biochimie et Hématologie</a></h4>
+              </div>
+            </div>
+      
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
+              <div class="icon-box">
+                <div class="icon"><i class="fas fa-lungs"></i></div>
+                <h4><a href="">Analyses de Gaz Sanguins et Tests Respiratoires</a></h4>
+              </div>
+            </div>
+      
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
+              <div class="icon-box">
+                <div class="icon"><i class="fas fa-biohazard"></i></div>
+                <h4><a href="">Microbiologie et Tests Infectieux</a></h4>
+              </div>
+            </div>
+      
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
+              <div class="icon-box">
+                <div class="icon"><i class="fas fa-dna"></i></div>
+                <h4><a href="">Tests Génétiques et Médecine Prédictive</a></h4>
+              </div>
+            </div>
+      
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
+              <div class="icon-box">
+                <div class="icon"><i class="fas fa-heartbeat"></i></div>
+                <h4><a href="">Tests Cardiologiques et Surveillance de la Santé</a></h4>
+              </div>
+            </div>
+      
+          </div>
+      
+        </div>
+      </section>
+      
+  
+
+  </main>
+  
+  <footer id="footer">
+    <div class="container d-md-flex py-4">
+      <div class="me-md-auto text-center text-md-start">
+        <div class="copyright">
+          &copy; Copyright <strong><span>LabControl</span></strong>. All Rights Reserved
+        </div>
+      </div>
+    </div>
+  </footer>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i>
+  

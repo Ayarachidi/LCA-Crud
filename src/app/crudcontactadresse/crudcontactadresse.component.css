@@ -1,0 +1,371 @@
+.adresses-container {
+    margin-left: 0;
+    padding: 20px;
+    background-color: #f4f7fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Table responsive */
+.table-responsive {
+    overflow-x: auto;
+    margin-top: 10px;
+    border-radius: 8px;
+   margin-left:250px;
+   width:1017px ;
+
+}
+
+/* Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+}
+
+/* En-têtes de table */
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #ededed;
+    color: #495057;
+    font-weight: bold;
+}
+
+td {
+    background-color: #ffffff;
+}
+
+/* Boutons */
+button {
+    margin: 5px;
+}
+
+.btn-icon {
+    background-color: #ffffff;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    border-radius: 50%;
+}
+
+.edit-icon i {
+    color: #28a745;
+    font-size: 1.5em;
+}
+
+.edit-icon:hover {
+    background-color: #d4edda;
+}
+
+.delete-icon i {
+    color: #dc3545;
+    font-size: 1.5em;
+}
+
+.delete-icon:hover {
+    background-color: #f8d7da;
+}
+
+.btn-icon:hover i {
+    transform: scale(1.1);
+}
+
+tbody tr:hover {
+    background-color: #f1f3f5;
+}
+
+.btn-add {
+    background-color: #ee7d11;
+    color: white;
+    font-size: 1rem;
+    padding: 8px 12px;
+    border: 1.5px solid #ee7d11;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.btn-add i {
+    font-size: 1.2rem;
+    margin-right: 5px;
+}
+
+.btn-add:hover {
+    background-color: #ffffff;
+    color: #ee7d11;
+}
+.add-icon i {
+    color: #462cb7; /* Vert pour l'ajout */
+    font-size: 1.5em; /* Taille augmentée */
+  }
+  
+  .add-icon:hover {
+    background-color: #d6e6fa; /* Fond vert clair au survol */
+   
+  }
+  
+  .titre {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    margin-bottom: 50px;
+    margin-right:-200px;
+}
+
+/* Style de fond flou pour le modal */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px);
+    z-index: 10;
+}
+
+/* Style du modal */
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+    width: 90%;
+    max-width: 400px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-title {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+    color: #495057;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: #495057;
+    margin-bottom: 5px;
+}
+
+.form-control {
+    height: 35px;
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.btn {
+    border-radius: 5px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    margin-left: 320px;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border: none;
+   
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+.custom-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1050;
+  }
+  
+  .modal-content {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    width: 500px;
+    max-width: 90%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .modal-body {
+    margin-top: 10px;
+  }
+  
+  .modal-footer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .btn-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: rgb(255, 36, 36);
+  }
+  .custom-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Plus sombre pour l'arrière-plan */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1050;
+  }
+  
+  .modal-content {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    width: 450px;
+    max-width: 90%;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Ombre douce */
+    animation: scaleIn 0.3s ease; /* Animation à l'ouverture */
+  }
+  
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+  }
+  
+  .modal-header .modal-title {
+    font-size: 1.5rem;
+    color: #007bff; /* Couleur principale */
+  }
+  
+  .modal-header .btn-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #333;
+    cursor: pointer;
+  }
+  
+  .modal-body {
+    margin-top: 10px;
+  }
+  
+  .address-item {
+    margin: 10px 0;
+    font-size: 1.1rem;
+  }
+  
+  .address-item span {
+    color: #555;
+  }
+  
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+  }
+  
+  .modal-footer .btn-primary {
+    background-color: #5a6268;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .modal-footer .btn-primary:hover {
+    background-color:#5a6268;
+  }
+
+  .btn-success {
+    background-color: #007bff;
+    border: none;
+    
+}
+
+.btn-success:hover {
+    background-color: #0056b3;
+}
+  
+  /* Animation pour l'ouverture du modal */
+  @keyframes scaleIn {
+    from {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  

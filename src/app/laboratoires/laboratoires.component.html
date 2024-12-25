@@ -1,0 +1,182 @@
+<div class="d-flex justify-content-between align-items-center my-4"  >
+  <div class="titre">
+    <h1>Liste des laboratoires</h1>
+  </div>
+  <button class="btn btn-add" title="Ajouter un laboratoire" (click)="openAddModal()">
+    <i class="bx bx-plus"></i> Ajouter laboratoire
+  </button>
+</div>
+
+<div *ngIf="laboratoires.length; else noData">
+  <div class="table-responsive">
+    <table class="table table-striped table-hover table-bordered">
+      <thead class="table-dark text-center">
+        <tr>
+          <th>Nom</th>
+          <th>Logo</th>
+          <th>Nrc</th>
+          <th>Date Active</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let laboratoire of laboratoires">
+          <td>{{ laboratoire.nom }}</td>
+          <td>
+            <img [src]="laboratoire.logo" alt="Logo" class="img-thumbnail" width="100" height="100" *ngIf="laboratoire.logo">
+          </td>
+          
+          
+          <td>{{ laboratoire.nrc }}</td>
+          <td>{{ laboratoire.dateActivation }}</td>
+          <td class="text-center">
+            <button class="btn-icon edit-icon mx-1" title="Modifier" (click)="openEditModal(laboratoire)">
+              <i class="bx bx-edit-alt"></i>
+            </button>
+            <button class="btn-icon delete-icon mx-1" title="Supprimer" (click)="confirmerSuppression(laboratoire.id)">
+              <i class="bx bx-trash"></i>
+            </button>
+            <button class="btn-icon add-icon mx-1" title="Voir détails" (click)="navigateToCrudLabo(laboratoire.id)">
+              <i class="fa fa-info-circle"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #noData>
+  <p class="text-center text-muted mt-4">Aucun laboratoire à afficher.</p>
+</ng-template>
+
+<!-- Modal pour Ajouter un laboratoire -->
+<div class="modal" *ngIf="isAddModalOpen">
+  <div class="modal-content">
+    <h3 class="modal-title">Ajouter un nouveau laboratoire</h3>
+
+    <!-- Étape 1 : Informations générales -->
+    <div *ngIf="currentStep === 1">
+      <form>
+        <div class="form-group">
+          <label for="nom">Nom</label>
+          <input type="text" id="nom" class="form-control" placeholder="Nom" [(ngModel)]="newLaboratoire.nom" name="nom"  />
+
+        </div>
+        <div class="form-group">
+          <label for="logo">Logo</label>
+          <input type="file" id="logo" class="form-control" (change)="onFileSelected($event)" name="logo" accept="image/*" />
+        </div>
+        
+        <div class="form-group">
+          <label for="nrc">NRC</label>
+          <input type="text" id="nrc" class="form-control" placeholder="Numéro de registre de commerce" [(ngModel)]="newLaboratoire.nrc" name="nrc"  />
+        </div>
+        <div class="form-group">
+          <label for="dateActivation">Date Activation</label>
+          <input type="datetime-local" id="dateActivation" class="form-control" [(ngModel)]="newLaboratoire.dateActivation" name="dateActivation" />
+        </div>
+      </form>
+      <div class="modal-footer">
+        <button class="btn btn-primary" (click)="goToNextStep()">Suivant</button>
+        <button class="btn btn-secondary" (click)="closeAddModal()">Annuler</button>
+      </div>
+    </div>
+
+    <!-- Étape 2 : Contact -->
+    <div *ngIf="currentStep === 2">
+      <form>
+        <div class="form-group">
+          <label for="numTel">Numéro de téléphone</label>
+          <input type="text" id="numTel" class="form-control" placeholder="Numéro de téléphone" [(ngModel)]="newContact.numTel" name="numTel"  />
+        </div>
+        <div class="form-group">
+          <label for="fax">Fax</label>
+          <input type="text" id="fax" class="form-control" placeholder="Fax" [(ngModel)]="newContact.fax" name="fax" />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" class="form-control" placeholder="Email" [(ngModel)]="newContact.email" name="email" required />
+        </div>
+      </form>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="goToPreviousStep()">Précédent</button>
+        <button class="btn btn-primary" (click)="goToNextStep()">Suivant</button>
+      </div>
+    </div>
+
+    <!-- Étape 3 : Adresse -->
+    <div *ngIf="currentStep === 3">
+      <form>
+        <div class="form-group">
+          <label for="numVoie">Numéro de voie</label>
+          <input type="text" id="numVoie" class="form-control" placeholder="Numéro de voie" [(ngModel)]="newAdresse.numVoie" name="numVoie" required />
+        </div>
+        <div class="form-group">
+          <label for="nomVoie">Nom de voie</label>
+          <input type="text" id="nomVoie" class="form-control" placeholder="Nom de voie" [(ngModel)]="newAdresse.nomVoie" name="nomVoie" required />
+        </div>
+        <div class="form-group">
+          <label for="codePostal">Code postal</label>
+          <input type="text" id="codePostal" class="form-control" placeholder="Code postal" [(ngModel)]="newAdresse.codePostal" name="codePostal" required />
+        </div>
+        <div class="form-group">
+          <label for="ville">Ville</label>
+          <input type="text" id="ville" class="form-control" placeholder="Ville" [(ngModel)]="newAdresse.ville" name="ville" required />
+        </div>
+        <div class="form-group">
+          <label for="commune">Commune</label>
+          <input type="text" id="commune" class="form-control" placeholder="Commune" [(ngModel)]="newAdresse.commune" name="commune" required />
+        </div>
+      </form>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="goToPreviousStep()">Précédent</button>
+        <button class="btn btn-danger" (click)="deleteLaboratoireAndContact()">Annuler</button>
+        <button class="btn btn-primary" (click)="saveAdresse()">Enregistrer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal pour Modifier un laboratoire -->
+<div class="modal" *ngIf="isEditModalOpen">
+  <div class="modal-content">
+    <h3 class="modal-title">Modifier le laboratoire</h3>
+    <form>
+      <div class="form-group">
+        <label for="nom">Nom</label>
+        <input type="text" id="nom" class="form-control" [(ngModel)]="currentLaboratoire.nom" name="nom" required />
+      </div>
+      <div class="form-group">
+        <label for="logo">Logo</label>
+        <!-- Afficher le logo actuel -->
+        <img *ngIf="currentLaboratoire.logo" [src]="currentLaboratoire.logo" alt="Logo actuel" class="img-thumbnail" width="100" height="100" />
+        <input type="file" id="logo" class="form-control" (change)="onFileSelected($event)" />
+      </div>
+      <div class="form-group">
+          <label for="nrc">NRC</label>
+          <input type="text" id="nrc" class="form-control" [(ngModel)]="currentLaboratoire.nrc" name="nrc" required />
+        </div>
+        <div class="form-group">
+          <label for="dateActivation">Date Activation</label>
+          <input type="datetime-local" id="dateActivation" class="form-control" [(ngModel)]="currentLaboratoire.dateActivation" name="dateActivation" />
+        </div>
+    </form>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" (click)="closeEditModal()">Annuler</button>
+      <button class="btn btn-primary" (click)="updateLaboratoire()">Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<!-- Popup de confirmation -->
+<div class="modal" *ngIf="isPopupVisible">
+  <div class="modal-content">
+    <h3>Succès !</h3>
+    <p>Les informations ont été enregistrées avec succès.</p>
+    <div class="modal-footer">
+      <button class="btn btn-primary" (click)="addAnotherContact()">Ajouter un autre contact</button>
+      <button class="btn btn-secondary" (click)="closePopup()">Fermer</button>
+    </div>
+  </div>
+</div>

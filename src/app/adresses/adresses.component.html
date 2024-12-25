@@ -1,0 +1,97 @@
+<div class="d-flex justify-content-between align-items-center my-4">
+    <div class="titre">
+      <h1 class="text-center">Liste des Adresses</h1>
+    </div>
+    <button class="btn btn-add" title="Ajouter une adresse" (click)="openModal()">
+      <i class="bx bx-plus"></i> Ajouter adresse
+    </button>
+  </div>
+  
+  <div *ngIf="adresses.length; else noData">
+    <div class="table-responsive"> 
+      <table class="table table-striped table-hover table-bordered">
+        <thead class="table-dark text-center">
+          <tr>
+            <th>Num Voie</th>
+            <th>Nom Voie</th>
+            <th>Code Postal</th>
+            <th>Ville</th>
+            <th>Commune</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let adresse of adresses">
+            <td>{{ adresse.numVoie }}</td>
+            <td>{{ adresse.nomVoie }}</td>
+            <td>{{ adresse.codePostal }}</td>
+            <td>{{ adresse.ville }}</td>
+            <td>{{ adresse.commune }}</td>
+            <td class="text-center">
+              <button class="btn-icon edit-icon mx-1" title="Modifier" (click)="openModal(adresse)">
+                <i class="bx bx-edit-alt"></i>
+              </button>
+              <button class="btn-icon delete-icon mx-1" title="Supprimer" (click)="openDeleteModal(adresse)">
+                <i class="bx bx-trash"></i>
+              </button>
+              
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <ng-template #noData>
+    <p class="text-center text-muted mt-4">Aucune adresse à afficher.</p>
+  </ng-template>
+  
+  <!-- Modal pour ajouter ou modifier une adresse -->
+  <div class="modal-backdrop" *ngIf="isModalOpen"></div>
+  <div class="modal" *ngIf="isModalOpen">
+    <div class="modal-content">
+      <h3 class="modal-title">{{ isEditMode ? 'Modifier l\'adresse' : 'Ajouter une nouvelle adresse' }}</h3>
+      <form (ngSubmit)="saveAdresse()">
+        <div class="form-group">
+          <label for="numVoie">Num Voie</label>
+          <input type="text" id="numVoie" class="form-control" placeholder="Num Voie" [(ngModel)]="newAdresse.numVoie" name="numVoie" required>
+        </div>
+        <div class="form-group">
+          <label for="nomVoie">Nom Voie</label>
+          <input type="text" id="nomVoie" class="form-control" placeholder="Nom Voie" [(ngModel)]="newAdresse.nomVoie" name="nomVoie" required>
+        </div>
+        <div class="form-group">
+          <label for="codePostal">Code Postal</label>
+          <input type="text" id="codePostal" class="form-control" placeholder="Code Postal" [(ngModel)]="newAdresse.codePostal" name="codePostal" required>
+        </div>
+        <div class="form-group">
+          <label for="ville">Ville</label>
+          <input type="text" id="ville" class="form-control" placeholder="Ville" [(ngModel)]="newAdresse.ville" name="ville" required>
+        </div>
+        <div class="form-group">
+          <label for="commune">Commune</label>
+          <input type="text" id="commune" class="form-control" placeholder="Commune" [(ngModel)]="newAdresse.commune" name="commune" required>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeModal()">Annuler</button>
+          <button type="submit" class="btn btn-primary">{{ isEditMode ? 'Enregistrer les modifications' : 'Enregistrer' }}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- Modal de confirmation de suppression -->
+<div class="modal-backdrop" *ngIf="isDeleteModalOpen"></div>
+<div class="modal" *ngIf="isDeleteModalOpen">
+  <div class="modal-content">
+    <h3 class="modal-title">Confirmer la suppression</h3>
+    <p>Êtes-vous sûr de vouloir supprimer cette adresse ?</p>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="closeDeleteModal()">Annuler</button>
+      <button type="button" class="btn btn-danger" (click)="deleteAdresse()">Supprimer</button>
+    </div>
+  </div>
+</div>
+
+ 
+
+  

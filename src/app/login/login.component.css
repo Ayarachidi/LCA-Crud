@@ -1,0 +1,307 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(120deg, #0d3b66, #3a7ca5);
+    color: #ffffff;
+}
+
+.my-login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+}
+
+.my-login-page .card-wrapper {
+    width: 400px;
+    border-radius: 15px;
+    background: #ffffff;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.my-login-page .card {
+    border: none;
+    padding: 30px;
+}
+
+.my-login-page .card-title {
+    margin-bottom: 25px;
+    font-size: 1.5rem;
+    color: #0d3b66;
+    font-weight: bold;
+    text-align: center;
+}
+
+.my-login-page .form-group label {
+    color: #333;
+    font-weight: bold;
+}
+
+.my-login-page .form-control {
+    border: 1.5px solid #ddd;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 14px;
+}
+
+.my-login-page .form-control:focus {
+    border-color: #3a7ca5;
+    box-shadow: 0 0 5px rgba(58, 124, 165, 0.5);
+    outline: none;
+}
+
+.my-login-page .btn {
+    background: #0d3b66;
+    color: #fff;
+    border-radius: 20px;
+    padding: 10px 15px;
+    font-size: 16px;
+    transition: background 0.3s ease;
+}
+
+.my-login-page .btn:hover {
+    background: #3a7ca5;
+}
+
+.my-login-page .footer {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    text-align: center;
+    color: #666;
+}
+
+.my-login-page .footer a {
+    color: #3a7ca5;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.my-login-page .footer a:hover {
+    text-decoration: underline;
+}
+
+.my-login-page .forgot-password {
+    font-size: 0.9rem;
+    text-align: right;
+    display: block;
+    color: #3a7ca5;
+}
+#header {
+    background: #fff;
+    transition: all 0.5s;
+    z-index: 997;
+    padding: 15px 0;
+    top: 0px;
+    box-shadow: 0px 2px 15px rgba(25, 119, 204, 0.1);
+  }
+  
+  #header.header-scrolled {
+    top: 0;
+  }
+  
+  #header .logo {
+    font-size: 30px;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  #header .logo a {
+    color: #0e2238;
+  }
+  
+  #header .logo img {
+    max-height: 40px;
+  }
+  
+  /**
+  * Appointment Button *
+  */
+  .appointment-btn {
+    margin-left: 27px;
+    margin-right: -20px;
+    background: #0e2238;
+    color: #fff;
+    border-radius: 20px;
+    padding: 8px 15px;
+    white-space: nowrap;
+    transition: 0.3s;
+    font-size: 14px;
+    display: inline-block;
+  }
+
+  
+  
+  .appointment-btn:hover {
+    background: #0e2238;
+    color: #fff;
+  }
+  
+  @media (max-width: 768px) {
+    .appointment-btn {
+      margin: 0 15px 0 0;
+      padding: 6px 18px;
+    }
+  }
+  
+  /*--------------------------------------------------------------
+  # Navigation Menu
+  --------------------------------------------------------------*/
+  /**
+  * Desktop Navigation 
+  */
+  .navbar {
+    padding: 0;
+  }
+  
+  .navbar ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    list-style: none;
+    align-items: center;
+  }
+  
+  .navbar li {
+    position: relative;
+  }
+  
+  .navbar>ul>li {
+    position: relative;
+    white-space: nowrap;
+    padding: 8px 0 8px 20px;
+  }
+  
+  .navbar a,
+  .navbar a:focus {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #0e2238;
+    white-space: nowrap;
+    transition: 0.3s;
+    border-bottom: 2px solid #fff;
+    padding: 5px 2px;
+  }
+  
+  .navbar a i,
+  .navbar a:focus i {
+    font-size: 12px;
+    line-height: 0;
+    margin-left: 5px;
+  }
+  
+  .navbar a:hover,
+  .navbar .active,
+  .navbar .active:focus,
+  .navbar li:hover>a {
+    color: #0e2238;
+    border-color: #0e2238;
+  }
+  /**
+  * Mobile Navigation 
+  */
+  .mobile-nav-toggle {
+    color: #0e2238;
+    font-size: 28px;
+    cursor: pointer;
+    display: none;
+    line-height: 0;
+    transition: 0.5s;
+  }
+  
+  .mobile-nav-toggle.bi-x {
+    color: #fff;
+  }
+  
+  @media (max-width: 991px) {
+    .mobile-nav-toggle {
+      display: block;
+    }
+  
+    .navbar ul {
+      display: none;
+    }
+  }
+  
+  .navbar-mobile {
+    position: fixed;
+    overflow: hidden;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: rgba(28, 47, 65, 0.9);
+    transition: 0.3s;
+    z-index: 999;
+  }
+  
+  .navbar-mobile .mobile-nav-toggle {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+  }
+  
+  .navbar-mobile ul {
+    display: block;
+    position: absolute;
+    top: 55px;
+    right: 15px;
+    bottom: 15px;
+    left: 15px;
+    padding: 10px 0;
+    background-color: #fff;
+    overflow-y: auto;
+    transition: 0.3s;
+  }
+  
+  .navbar-mobile>ul>li {
+    padding: 0;
+  }
+  
+  .navbar-mobile a,
+  .navbar-mobile a:focus {
+    padding: 10px 20px;
+    font-size: 15px;
+    color: #0e2238;
+    border: none;
+  }
+  
+  .navbar-mobile a:hover,
+  .navbar-mobile .active,
+  .navbar-mobile li:hover>a {
+    color: #00ADB3;
+  }
+  
+  .navbar-mobile .getstarted,
+  .navbar-mobile .getstarted:focus {
+    margin: 15px;
+  }
+  .login-link {
+    margin-left: 25px;
+    border:1px solid #00ADB3;
+    background: white;
+    color: #00ADB3;
+    border-radius: 20px;
+    padding: 8px 15px;
+    white-space: nowrap;
+    transition: 0.3s;
+    font-size: 14px;
+    display: inline-block; /* Animation de transition */
+  }
+  
+  .login-link:hover {
+    background-color: #00ADB3; /* Couleur de fond au survol */
+    color: white; /* Couleur du texte au survol */
+  }
+  
