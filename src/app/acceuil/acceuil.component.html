@@ -15,7 +15,8 @@
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav>
-      <a class="appointment-btn scrollto login-link" href="login.html?type=agent">Espace patient</a>
+      <a class="appointment-btn scrollto login-link" [routerLink]="['/espace-client']">Espace patient</a>
+
       <a 
       class="appointment-btn scrollto"
       (click)="redirectToLogin()">

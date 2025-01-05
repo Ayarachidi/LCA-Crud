@@ -24,4 +24,12 @@
       </a>
     </li>
   </ul>
+
+  <!-- Footer with Sign Out -->
+  <div class="sidenav-footer">
+    <button class="sign-out-btn" >
+      <i class="fas fa-sign-out-alt"></i>
+      <span *ngIf="!isLeftSidebarCollapsed" (click)="signOut()">Sign Out</span>
+    </button>
+  </div>
 </div>

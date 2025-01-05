@@ -5,32 +5,11 @@ import { routes } from './app/app.routes';
 import { importProvidersFrom } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { KeycloakService, KeycloakAngularModule } from 'keycloak-angular';
-import keycloakConfig from './environments/keycloak.config';
 import { APP_INITIALIZER } from '@angular/core';
-import { Router } from '@angular/router';
+import { KeycloakInitService } from './app/keycloak-init.service';
 
-// Fonction d'initialisation de Keycloak
-export function initializeKeycloak(keycloak: KeycloakService, router: Router): Promise<void> {
-  return keycloak
-    .init({
-      config: keycloakConfig,
-      initOptions: {
-        onLoad: 'check-sso',
-        checkLoginIframe: false,
-      },
-    })
-    .then(() => {
-      const roles = keycloak.getUserRoles();
-
-      // Redirection selon les rôles
-      if (roles.includes('ROLE_ADMIN')) {
-        router.navigate(['laboratoires']);
-      } else if (roles.includes('ROLE_TECHNICIEN')) {
-        router.navigate(['/analyses']);
-      } else {
-        router.navigate(['/acceuil']);
-      }
-    });
+export function initializeApp(keycloakInitService: KeycloakInitService): () => Promise<void> {
+  return () => keycloakInitService.initializeKeycloak();
 }
 
 bootstrapApplication(AppComponent, {
@@ -38,13 +17,9 @@ bootstrapApplication(AppComponent, {
     provideRouter(routes),
     importProvidersFrom(HttpClientModule, KeycloakAngularModule),
     {
-      provide: KeycloakService,
-      useFactory: () => new KeycloakService(),
-    },
-    {
       provide: APP_INITIALIZER,
-      useFactory: (keycloak: KeycloakService, router: Router) => () => initializeKeycloak(keycloak, router),
-      deps: [KeycloakService, Router],
+      useFactory: initializeApp,
+      deps: [KeycloakInitService],
       multi: true,
     },
   ],

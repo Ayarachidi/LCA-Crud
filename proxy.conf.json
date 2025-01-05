@@ -10,6 +10,18 @@
     "secure": false,
     "logLevel": "debug",  
     "changeOrigin": true
+  },
+  "/ANALYSE-MICROSERVICE": {
+    "target": "http://localhost:8888",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/PATIENT-SERVICE": {
+    "target": "http://localhost:8888",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
   }
 }
 

@@ -1,0 +1,142 @@
+<div class="d-flex justify-content-between align-items-center my-4"  >
+    <div class="titre">
+      <h1>Liste des Tests Analyse</h1>
+    </div>
+    <button class="btn btn-add" title="Ajouter un test analyse" (click)="openModal()" >
+      <i class="bx bx-plus"></i> Ajouter Test Analyse
+    </button>
+  </div>
+  <div *ngIf="tests.length > 0; else noContacts">
+    <div class="table-responsive">
+      <table class="table table-striped table-hover table-bordered">
+        <thead class="table-dark text-center">
+          <tr>
+            <th scope="col">Nom Test</th>
+            <th scope="col">Interval Min De Référence</th>
+            <th scope="col">Interval Max De Référence</th>
+            <th scope="col">Unité de réference</th>
+            <th scope="col">Sous Epreuve</th>
+            <th scope="col">Détails</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let test of tests">
+            <td>{{test.nomTest}}</td>
+            <td>{{test.intervalMinDeReference}}</td>
+            <td>{{test.intervalMaxDeReference}}</td>
+            <td>{{test.uniteDeReference}}</td>
+            <td>{{test.sousEpreuve}}</td>
+            <td>{{test.details}}</td>
+            <td class="text-center">
+              <button 
+                class="btn-icon edit-icon mx-1" 
+                title="Modifier" 
+                (click)="editTest(test.id)">
+                <i class="bx bx-edit-alt"></i>
+              </button>
+  
+              <button class="btn-icon delete-icon mx-1" title="Supprimer" (click)="confirmerDesactivationTestAnalyse(test.id)">
+                <i class="bx bx-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <ng-template #noContacts>
+    <p>Aucun test analyse trouvé pour ce analyse.</p>
+  </ng-template>
+  <!-- Modal pour ajouter une test analyse  -->
+<div class="custom-modal" *ngIf="isAddTestAnalyseModalOpen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          <i class="fa fa-plus"></i> Ajouter Test Analyse
+        </h5>
+        <button type="button" class="btn-close" (click)="closeModal()">
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">
+          <h6>Informations Test analyse</h6>
+          <form (ngSubmit)="saveTest()">
+            <div class="form-group">
+                <label for="nomTest">Nom Test</label>
+                <input type="text" id="nomTest" class="form-control" placeholder="Nom Test"  [(ngModel)]="newTestAnalyse.nomTest" name="nomTest" required />
+              </div>
+              <div class="form-group">
+                <label for="intervalMinDeReference">intervalMinDeReference</label>
+                <input type="text" id="intervalMinDeReference" class="form-control" placeholder="intervalMinDeReference" [(ngModel)]="newTestAnalyse.intervalMinDeReference" name="intervalMinDeReference" required />
+              </div>
+              <div class="form-group">
+                <label for="intervalMaxDeReference">intervalMaxDeReference</label>
+                <input type="text" id="intervalMaxDeReference" class="form-control" placeholder="intervalMaxDeReference" [(ngModel)]="newTestAnalyse.intervalMaxDeReference"  name="intervalMaxDeReference" required />
+              </div>
+              <div class="form-group">
+                <label for="Unité de réference">uniteDeReference</label>
+                <input type="text" id="uniteDeReference" class="form-control" placeholder="uniteDeReference"  [(ngModel)]="newTestAnalyse.uniteDeReference" name="uniteDeReference" required />
+              </div>
+              <div class="form-group">
+                <label for="details">Détails</label>
+                <input type="text" id="details" class="form-control" placeholder="details" [(ngModel)]="newTestAnalyse.details"  name="details" required />
+              </div>
+              <div class="form-group">
+                <label for="sousEpreuve">Sous Epreuve</label>
+                <input type="text" id="sousEpreuve" class="form-control" placeholder="sousEpreuve" [(ngModel)]="newTestAnalyse.sousEpreuve"  name="sousEpreuve" required />
+              </div>
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+          </form>
+        </div>
+  
+      </div>
+</div>
+
+<!-- Modal de modification du testanalyse -->
+<div class="custom-modal" *ngIf="isEditTestAnalyseModalOpen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          <i class="fa fa-edit"></i> Modifier Test analyse
+        </h5>
+        <button type="button" class="btn-close" (click)="closeEditModal()">
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Formulaire Contact -->
+        <form >
+          <div >
+            <h6>Informations Test analyse</h6>
+            <div class="form-group">
+                <label for="nomTest">Nom Test</label>
+                <input type="text" id="nomTest" class="form-control" placeholder="Nom Test"  [(ngModel)]="currentTestAnalyse.nomTest" name="nomTest" required />
+              </div>
+              <div class="form-group">
+                <label for="intervalMinDeReference">intervalMinDeReference</label>
+                <input type="text" id="intervalMinDeReference" class="form-control" placeholder="intervalMinDeReference" [(ngModel)]="currentTestAnalyse.intervalMinDeReference" name="intervalMinDeReference" required />
+              </div>
+              <div class="form-group">
+                <label for="intervalMaxDeReference">intervalMaxDeReference</label>
+                <input type="text" id="intervalMaxDeReference" class="form-control" placeholder="intervalMaxDeReference" [(ngModel)]="currentTestAnalyse.intervalMaxDeReference"  name="intervalMaxDeReference" required />
+              </div>
+              <div class="form-group">
+                <label for="Unité de réference">uniteDeReference</label>
+                <input type="text" id="uniteDeReference" class="form-control" placeholder="uniteDeReference"  [(ngModel)]="currentTestAnalyse.uniteDeReference" name="uniteDeReference" required />
+              </div>
+              <div class="form-group">
+                <label for="details">Détails</label>
+                <input type="text" id="details" class="form-control" placeholder="details" [(ngModel)]="currentTestAnalyse.details"  name="details" required />
+              </div>
+              <div class="form-group">
+                <label for="sousEpreuve">Sous Epreuve</label>
+                <input type="text" id="sousEpreuve" class="form-control" placeholder="sousEpreuve" [(ngModel)]="currentTestAnalyse.sousEpreuve"  name="sousEpreuve" required />
+              </div>
+            <button type="button" class="btn btn-primary"  (click)="updateTest()">Enregistrer</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,92 @@
+<div class="d-flex justify-content-between align-items-center my-4"  >
+    <div class="titre">
+      <h1>Liste des épreuves</h1>
+    </div>
+    <button class="btn btn-add" title="Ajouter une épreuve" (click)="openModal()" >
+      <i class="bx bx-plus"></i> Ajouter Epreuve
+    </button>
+  </div>
+  <div *ngIf="epreuves.length > 0; else noContacts">
+    <div class="table-responsive">
+      <table class="table table-striped table-hover table-bordered">
+        <thead class="table-dark text-center">
+          <tr>
+            <th scope="col">Nom épreuve</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let epreuve of epreuves">
+            <td>{{epreuve.nom}}</td>
+            <td class="text-center">
+              <button 
+                class="btn-icon edit-icon mx-1" 
+                title="Modifier" 
+                (click)="editEpreuve(epreuve.id)">
+                <i class="bx bx-edit-alt"></i>
+              </button>
+  
+              <button class="btn-icon delete-icon mx-1" title="Supprimer" (click)="confirmerDesactivationEpreuve(epreuve.id)">
+                <i class="bx bx-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <ng-template #noContacts>
+    <p>Aucun epreuve trouvé pour ce analyse.</p>
+  </ng-template>
+  <!-- Modal pour ajouter une epreuve  -->
+<div class="custom-modal" *ngIf="isAddEpreuveModalOpen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          <i class="fa fa-plus"></i> Ajouter Epreuve
+        </h5>
+        <button type="button" class="btn-close" (click)="closeModal()">
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">
+          <h6>Informations Epreuve</h6>
+          <form (ngSubmit)="saveEpreuve()">
+            <div class="form-group">
+              <label for="nom">Nom</label>
+              <input type="text" id="nom" class="form-control" [(ngModel)]="newEpreuve.nom" name="nom" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+          </form>
+        </div>
+  
+      </div>
+</div>
+
+<!-- Modal de modification du cepreuve -->
+<div class="custom-modal" *ngIf="isEditEpreuveModalOpen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          <i class="fa fa-edit"></i> Modifier Epreuve
+        </h5>
+        <button type="button" class="btn-close" (click)="closeEditModal()">
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Formulaire Contact -->
+        <form >
+          <div >
+            <h6>Informations Epreuve</h6>
+            <div class="form-group">
+              <label for="nom">Nom</label>
+              <input type="text" id="nom" class="form-control" [(ngModel)]="currentEpreuve.nom" name="nom" required>
+            </div>
+            <button type="button" class="btn btn-primary"  (click)="updateEpreuve()">Enregistrer</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  

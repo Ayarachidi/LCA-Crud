@@ -11,6 +11,7 @@
       <i class="fal fa-times close-icon"></i>
     </button>
   </div>
+  
   <ul class="sidenav-nav">
     <li class="sidenav-nav-item" *ngFor="let item of items; let i = index">
       <a
@@ -24,4 +25,12 @@
       </a>
     </li>
   </ul>
+
+ <!-- Footer with Sign Out -->
+ <div class="sidenav-footer">
+  <button class="sign-out-btn" >
+    <i class="fas fa-sign-out-alt"></i>
+    <span *ngIf="!isLeftSidebarCollapsed" (click)="signOut()">Sign Out</span>
+  </button>
+</div>
 </div>

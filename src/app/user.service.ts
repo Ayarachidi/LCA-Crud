@@ -16,7 +16,11 @@ export class UserService {
   desactiverUtilisateur(id: string): Observable<void> {
     return this.http.put<void>(`${this.baseUrl}/desactiver/${id}`, {});
   }
-
+  
+  getUtilisateur(id: string): Observable<User> {
+    return this.http.get<User>(`${this.baseUrl}/${id}`);
+  }
+  
   // Récupérer les utilisateurs actifs
   getActiveUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${this.baseUrl}/active`);

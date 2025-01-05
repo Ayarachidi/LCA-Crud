@@ -15,8 +15,8 @@ export class AcceuilComponent {
   constructor(private keycloakInitService: KeycloakInitService) {}
 
   redirectToLogin(): void {
-    this.keycloakInitService.initializeKeycloak().catch((err: any) => {
-      console.error('Erreur d\'initialisation de Keycloak', err);
+    this.keycloakInitService.login().catch((err: any) => {
+      console.error('Erreur lors de la redirection vers Keycloak', err);
     });
   }
 }

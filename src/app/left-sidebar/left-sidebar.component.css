@@ -95,3 +95,71 @@
 .active .sidenav-link-text {
   color: #000;
 }
+.sidenav-footer {
+  margin-top: auto; /* Positionne le bouton en bas */
+  padding: 10px;
+  text-align: center;
+  border-top: 1px solid #ddd;
+  background-color: #f8f9fa;
+}
+
+.sign-out-btn {
+  background: none;
+  border: none;
+  color: #333;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.sign-out-btn i {
+  margin-right: 8px;
+}
+
+.sign-out-btn:hover {
+  color: #e74c3c;
+}
+.sidenav {
+  background: #0e2238;
+  transition: all 0.5s ease;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  width: 13.5625rem;
+  height: 100vh;
+  box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
+  display: flex;
+  flex-direction: column; /* Ajout pour positionner le footer */
+}
+.sidenav-nav {
+  flex: 1 1 auto;
+  overflow-y: auto; /* Permet le défilement si nécessaire */
+}
+.sidenav-footer {
+  margin-top: auto;
+  padding: 10px;
+  text-align: center;
+  border-top: 1px solid #ddd;
+  background-color: #f8f9fa;
+}
+.sign-out-btn {
+  background: none;
+  border: none;
+  color: #333;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.sign-out-btn i {
+  margin-right: 8px;
+}
+.sign-out-btn:hover {
+  color: #e74c3c;
+}
+

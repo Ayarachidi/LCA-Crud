@@ -1,0 +1,260 @@
+<div class="d-flex justify-content-between align-items-center my-4"  >
+    <div class="titre">
+      <h1>Liste des patients</h1>
+    </div>
+    <button class="btn btn-add" title="Ajouter un laboratoire" (click)="openModal()">
+      <i class="bx bx-plus"></i> Ajouter patient
+    </button>
+  </div>
+  <div *ngIf="patients.length > 0; else noPatients"> 
+    <div class="table-responsive">
+      <table class="table table-striped table-hover table-bordered">
+        <thead class="table-dark text-center">
+          <tr>
+            <th scope="col">Nom Complet</th>
+            <th scope="col">Date de Naissance</th>
+            <th scope="col">Lieu de Naissance</th>
+            <th scope="col">Sexe</th>
+            <th scope="col">Type de Pièce d'Identité</th>
+            <th scope="col">Numéro de Pièce d'Identité</th>
+            <th scope="col">Adresse</th>
+            <th scope="col">Numéro de Téléphone</th>
+            <th scope="col">Email</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let patient of patients">
+            <td>{{ patient.nomComplet }}</td>
+            <td>{{ patient.dateNaissance | date: 'dd/MM/yyyy' }}</td>
+            <td>{{ patient.lieuNaissance }}</td>
+            <td>{{ patient.sexe }}</td>
+            <td>{{ patient.typePieceIdentite }}</td>
+            <td>{{ patient.numPieceIdentite }}</td>
+            <td>{{ patient.adresse }}</td>
+            <td>{{ patient.numTel }}</td>
+            <td>{{ patient.email }}</td>
+            <td class="text-center">
+              <button 
+                class="btn-icon edit-icon mx-1" 
+                title="Modifier" (click)="editPatient(patient.id)">
+                <i class="bx bx-edit-alt"></i>
+              </button>
+              <button 
+                class="btn-icon delete-icon mx-1" 
+                title="Supprimer"  (click)="confirmerDesactivationPatient(patient.id)">
+                <i class="bx bx-trash"></i>
+              </button>
+              <button class="btn-icon add-icon mx-1" title="Voir Dossier" (click)="navigateToCrudDossier(patient.id)">
+                <i class="fa fa-info-circle"></i>
+              </button>
+            </td>
+            
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <ng-template #noPatients>
+    <p>Aucun patient actif trouvé.</p>
+  </ng-template>
+  
+<!-- Modal pour ajouter un patient -->
+<div class="custom-modal" *ngIf="isAddPatientModalOpen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          <i class="fa fa-plus"></i> Ajouter Patient
+        </h5>
+        <button type="button" class="btn-close" (click)="closeModal()">
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">
+        <h6>Informations Patient</h6>
+        <form (ngSubmit)="savePatient()">
+          <div class="form-group">
+            <label for="nomComplet">Nom Complet</label>
+            <input
+              type="text"
+              id="nomComplet"
+              class="form-control"
+              placeholder="Nom Complet"
+              [(ngModel)]="newPatient.nomComplet"
+              name="nomComplet"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="dateNaissance">Date de Naissance</label>
+            <input
+              type="date"
+              id="dateNaissance"
+              class="form-control"
+              [(ngModel)]="newPatient.dateNaissance"
+              name="dateNaissance"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="lieuNaissance">Lieu de Naissance</label>
+            <input
+              type="text"
+              id="lieuNaissance"
+              class="form-control"
+              placeholder="Lieu de Naissance"
+              [(ngModel)]="newPatient.lieuNaissance"
+              name="lieuNaissance"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="sexe">Sexe</label>
+            <select
+              id="sexe"
+              class="form-control"
+              [(ngModel)]="newPatient.sexe"
+              name="sexe"
+              required
+            >
+              <option value="Masculin">Masculin</option>
+              <option value="Féminin">Féminin</option>
+            </select>
+            
+          </div>
+          <div class="form-group">
+            <label for="typePieceIdentite">Type de Pièce d'Identité</label>
+            <input
+              type="text"
+              id="typePieceIdentite"
+              class="form-control"
+              placeholder="Type de Pièce d'Identité"
+              [(ngModel)]="newPatient.typePieceIdentite"
+              name="typePieceIdentite"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="numPieceIdentite">Numéro de Pièce d'Identité</label>
+            <input
+              type="text"
+              id="numPieceIdentite"
+              class="form-control"
+              placeholder="Numéro de Pièce d'Identité"
+              [(ngModel)]="newPatient.numPieceIdentite"
+              name="numPieceIdentite"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="adresse">Adresse</label>
+            <input
+              type="text"
+              id="adresse"
+              class="form-control"
+              placeholder="Adresse"
+              [(ngModel)]="newPatient.adresse"
+              name="adresse"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="numTel">Numéro de Téléphone</label>
+            <input
+              type="text"
+              id="numTel"
+              class="form-control"
+              placeholder="Numéro de Téléphone"
+              [(ngModel)]="newPatient.numTel"
+              name="numTel"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              class="form-control"
+              placeholder="Email"
+              [(ngModel)]="newPatient.email"
+              name="email"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Enregistrer</button>
+        </form>
+      </div>
+    </div>
+  </div>
+<!-- Modal de modification du patient -->
+<div class="custom-modal" *ngIf="isEditPatienteModalOpen">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">
+        <i class="fa fa-edit"></i> Modifier Patient
+      </h5>
+      <button type="button" class="btn-close" (click)="closeEditModal()">
+        &times;
+      </button>
+    </div>
+    <div class="modal-body">
+      <!-- Formulaire Patient -->
+      <form>
+        <div>
+          <h6>Informations Patient</h6>
+          
+          <div class="form-group">
+            <label for="nomComplet">Nom Complet</label>
+            <input type="text" id="nomComplet" class="form-control" placeholder="Nom Complet" [(ngModel)]="currentPatient.nomComplet" name="nomComplet" required />
+          </div>
+          
+          <div class="form-group">
+            <label for="dateNaissance">Date de Naissance</label>
+            <input type="date" id="dateNaissance" class="form-control" [(ngModel)]="currentPatient.dateNaissance" name="dateNaissance" required />
+          </div>
+          
+          <div class="form-group">
+            <label for="lieuNaissance">Lieu de Naissance</label>
+            <input type="text" id="lieuNaissance" class="form-control" placeholder="Lieu de Naissance" [(ngModel)]="currentPatient.lieuNaissance" name="lieuNaissance" required />
+          </div>
+          <div class="form-group">
+            <label for="sexe">Sexe</label>
+            <select id="sexe" class="form-control" [(ngModel)]="currentPatient.sexe" name="sexe" >
+              <option value="Masculin">Masculin</option>
+              <option value="Féminin">Féminin</option>
+            </select>
+            
+          </div>
+          <div class="form-group">
+            <label for="typePieceIdentite">Type de Pièce d'Identité</label>
+            <input type="text" id="typePieceIdentite" class="form-control" placeholder="Type Pièce d'Identité" [(ngModel)]="currentPatient.typePieceIdentite" name="typePieceIdentite" required />
+          </div>
+
+          <div class="form-group">
+            <label for="numPieceIdentite">Numéro de Pièce d'Identité</label>
+            <input type="text" id="numPieceIdentite" class="form-control" placeholder="Numéro Pièce Identité" [(ngModel)]="currentPatient.numPieceIdentite" name="numPieceIdentite" required />
+          </div>
+
+          <div class="form-group">
+            <label for="adresse">Adresse</label>
+            <input type="text" id="adresse" class="form-control" placeholder="Adresse" [(ngModel)]="currentPatient.adresse" name="adresse" required />
+          </div>
+
+          <div class="form-group">
+            <label for="numTel">Numéro de Téléphone</label>
+            <input type="text" id="numTel" class="form-control" placeholder="Numéro Téléphone" [(ngModel)]="currentPatient.numTel" name="numTel" required />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" class="form-control" placeholder="Email" [(ngModel)]="currentPatient.email" name="email" required />
+          </div>
+
+          <button type="button" class="btn btn-primary" (click)="updatePatient()">Enregistrer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,251 @@
+<div class="d-flex justify-content-between align-items-center my-4">
+    <!-- Titre de la page -->
+    <div class="titre">
+        <h1>Liste des examens</h1>
+    </div>
+
+    <!-- Section des détails du dossier -->
+    <div class="dossier-details d-flex align-items-center">
+        <!-- Affichage du numDossier -->
+        <div class="detail-item me-4" >
+            
+            <label>ID Utilisateur :</label>
+            <span>{{ dossier.utilisateurId }}</span>
+        </div>
+        <!-- Affichage de l'idUtilisateur -->
+        <div class="detail-item">
+            <label>Numéro du dossier :</label>
+            <span>{{ dossier.numDossier }}</span>
+        </div>
+        <div class="btnn">
+            
+    <!-- Bouton pour ajouter un examen -->
+    <button class="btn btn-add" title="Ajouter un examen" (click)="openAddExamenModal()">
+        <i class="bx bx-plus"></i> Ajouter Examen
+    </button>
+    
+        </div>
+        
+    </div>
+
+</div>
+<div *ngIf="examens.length > 0; else noContacts">
+    <div class="table-responsive">
+      <table class="table table-striped table-hover table-bordered">
+        <thead class="table-dark text-center">
+          <tr>
+            <th scope="col">Id Examen</th>
+            <th scope="col">Nom analyse</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let exam of examens">
+            <td>{{exam.id}}</td>
+            <td>{{exam.analyse.nom}}</td>
+            <td class="text-center">
+              <!-- Modifier -->
+              <button 
+                class="btn-icon edit-icon mx-1" 
+                title="Modifier" 
+                (click)="editExamen(exam.id)"
+               >
+                <i class="bx bx-edit-alt"></i>
+              </button>
+  
+              <!-- Supprimer -->
+              <button 
+                class="btn-icon delete-icon mx-1" 
+                title="Supprimer" 
+                (click)="confirmerDesactivationExamen(exam.id)"
+               >
+                <i class="bx bx-trash"></i>
+              </button>
+  
+              <!-- Ajouter Résultat -->
+              <button 
+              class="btn-icon add-icon mx-1" 
+              title="Voir Résultat" 
+              (click)="openAddResultModal1(exam)"
+          >
+              <i class="bx bx-show"></i> <!-- Icône modifiée -->
+          </button>
+          
+              <button 
+              class="btn-icon add-icon mx-1" 
+              title="Voir Résultat" 
+             (click)="openAddResultModal(exam)"
+             >
+              <i class="bx bx-plus"></i>
+            </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <ng-template #noContacts>
+    <p>Aucun examen trouvé .</p>
+  </ng-template>
+
+<!-- Modal for Adding examen -->
+
+    <div class="modal"  *ngIf="isAddExamenModalOpen">
+      <h3 class="modal-title">Ajouter un nouvel examen</h3>
+      <form>
+        <div class="form-group">
+          <label for="analyse">Analyse</label>
+          <select 
+          id="analyseId"
+          class="form-control"
+          (change)="onAnalyseChange($event)"
+        >
+          <option value="" disabled selected>Veuillez sélectionner une analyse</option> <!-- Option vide -->
+          <option *ngFor="let analyse of analyses" [value]="analyse.nom">{{ analyse.nom }}</option>
+        </select>
+        
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary"  (click)="AddExamen()" >Ajouter</button>
+          <button class="btn btn-secondary"  (click)="closeAddUserModal()">Annuler</button>
+        </div>
+      </form>
+    </div>
+  <!-- Modal for modify examen -->
+
+  <div class="modal" *ngIf="isEditExamenModalOpen">
+    <h3 class="modal-title">Modifier l'Examen</h3>
+    <form>
+      <div class="form-group">
+        <label for="analyse">Analyse</label>
+        <select
+        id="analyseId"
+        class="form-control"
+        [(ngModel)]="currentExamen.analyse.nom"
+        name="analyseNom"
+      >
+        <option value="" disabled>Veuillez sélectionner une analyse</option>
+        <option *ngFor="let analyse of analyses" [value]="analyse.nom">
+          {{ analyse.nom }}
+        </option>
+      </select>
+      
+      
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" >Enregistrer</button>
+        <button class="btn btn-secondary" (click)="closeAddUserModal()">Annuler</button>
+      </div>
+    </form>
+  </div>
+
+<!--  Modal Ajouter Résultat -->
+
+ 
+    <div  class="modal1" *ngIf="isResExamenModalOpen"
+
+    id="addResultModal">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="addResultModalLabel">
+          Ajouter Résultat pour {{ currentExamen.analyse.nom }}
+        </h5>
+        <button type="button" class="btn-close" (click)="closeModal()" aria-label="Fermer"></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered align-middle">
+          <thead class="table-dark text-center">
+            <tr>
+              <th>Nom du Test</th>
+              <th>Intervalle Min</th>
+              <th>Intervalle Max</th>
+              <th>Valeur</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let test of testAnalyses">
+                <td>{{ test.nomTest }}</td>
+                <td class="text-center">{{ test.intervalMinDeReference }}</td>
+                <td class="text-center">{{ test.intervalMaxDeReference }}</td>
+                <td>
+                    <input
+                        type="number"
+                        [(ngModel)]="resultats[test.nomTest]"
+                        class="form-control"
+                        placeholder="Entrez une valeur"
+                    />
+                </td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary1"
+          (click)="closeModal()"
+        >
+          Fermer
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="saveResults()"
+        >
+          Enregistrer
+        </button>
+      </div>
+    </div>
+  
+
+    <div  class="modal1" *ngIf="isaffichageResExamenModalOpen"
+
+    id="addResultModal">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="addResultModalLabel">
+          Résultats pour l'analyse  {{ currentExamen.analyse.nom }}
+        </h5>
+        <button type="button" class="btn-close" (click)="closeModal()" aria-label="Fermer"></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered align-middle">
+          <thead class="table-dark text-center">
+            <tr>
+              <th>Nom du Test</th>
+              <th>Intervalle Min</th>
+              <th>Intervalle Max</th>
+              <th>Valeur</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let test of testAnalyses">
+                <td>{{ test.nomTest }}</td>
+                <td class="text-center">{{ test.intervalMinDeReference }}</td>
+                <td class="text-center">{{ test.intervalMaxDeReference }}</td>
+                <td>
+                    <input
+                        type="number"
+                        [(ngModel)]="resultats[test.nomTest]"
+                        class="form-control"
+                        placeholder="Entrez une valeur" readonly
+                    />
+                </td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="closeModal()"
+        >
+          Fermer
+        </button>
+   
+      </div>
+    </div>
+  
+
